@@ -1,24 +1,49 @@
-//<script>
-//    var namebear = getElementById('name');
- //   documentgetElementById('name').innerHTML='<td id="name"></td>'; // modifier le nom selon l'ours cliqué
-
-
-//</script>
-//<script>
-//    var qty = getElementById('quantity');
-//    document.getElementById('quantity').innerHTML='<td id="quantity"></td>'; // modifier la quantité selon le nombre d'ours cliqué
-//
-//
-//</script>
 
 // count the clicked products for the quantity column
-let plusBtnClicks=0;   //nombre d'ours cliqué par type d'ours initiated to 0
-document.getElementsByClassName("fa-plus-square");
-document.addEventListener("click", function(e) {
-e.preventDefault();
-e.stopPropagation();  //stop listening to parents
-  
-document.getElementById("quantity");  //get the cell quantity of product
-document.innerText = (++plusBtnClicks    //add 1 for  a click
-    ) + '';
-});
+//First Bear
+
+
+    
+var i=0;   
+function addProd(){
+    i++;
+    
+    };
+var istring = JSON.stringify(i);
+function storeLocalItem(){
+    localStorage.setItem("qtyO1",istring);
+};
+//storing data : creating an item with the 'i' value
+function addAndStore() {
+    addProd();  
+    storeLocalItem();
+};
+
+document.getElementById('addprod1').addEventListener("click",addAndStore);
+
+
+
+
+
+document.getElementById('panier').addEventListener("click",getQty);
+function getQty() {
+    if(typeof localStorage!='undefined') { 
+        //get the value from the web storage
+        var x = localStorage.getItem("qtyO1");
+        //check if x does exist
+        if(x!=null) {
+            //if it does, convert x  str --> int
+            x=parseInt(x);
+        } else {
+            x=1;
+    }
+    
+    document.getElementById("quantity").innerHTML = x;
+    } else{
+        alert("local storage is not supported");
+    }
+};
+
+
+
+
